@@ -1,4 +1,1 @@
-void shoreCreateTable(char *);
-void shorePut(const char*, unsigned int, char*, void*);
-
-
+void shorePut(const char*, const char*, unsigned int, void*);

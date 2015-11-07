@@ -5,11 +5,11 @@
 #include <jansson.h>
 #include <string.h>
 #include "shoreClient.h"
+#include "json_parser.h"
 
 bool isZmqInited = false;
 void *zmq_context;
 void *zmq_requester;
-
 
 char *generate_json_data(const char *operation, const char *doid, const char *column, const unsigned int row, const unsigned int *shape) {
     char *ret_strings = NULL;
@@ -54,6 +54,8 @@ void shorePut(const char *doid, const char *column, unsigned int row, unsigned i
 
     zmq_send (zmq_requester, request, strlen(request), 0);
     zmq_recv (zmq_requester, buf, 2048, 0);
+
+    json_fixstring(buf, 2048);
 
     printf("%s\n",request);
     printf("%s\n",buf);
